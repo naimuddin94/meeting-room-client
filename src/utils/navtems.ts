@@ -12,31 +12,31 @@ export const adminNavItems: navItem[] = [
     href: "/",
   },
   {
-    label: "Products",
-    href: "/products",
+    label: "Meeting Room",
+    href: "/meeting-room",
   },
   {
     label: "Dashboard",
     children: [
       {
-        title: "Add Brand",
-        href: "/dashboard/add-brand",
-        description: "Add a new brand to your store.",
+        title: "Slots",
+        href: "/dashboard/slots",
+        description: "Slots management for room bookings",
       },
       {
-        title: "Add Product",
-        href: "/dashboard/add-product",
-        description: "Add new products to your inventory.",
+        title: "Add Room",
+        href: "/dashboard/add-room",
+        description: "Add a new room to your website.",
       },
       {
-        title: "Manage Product",
-        href: "/dashboard/manage-product",
-        description: "Edit or remove existing products.",
+        title: "Manage Rooms",
+        href: "/dashboard/manage-rooms",
+        description: "Edit or remove existing rooms.",
       },
       {
-        title: "Orders",
-        href: "/dashboard/orders",
-        description: "View and manage all customer orders.",
+        title: "Bookings",
+        href: "/dashboard/bookings",
+        description: "View and manage all customer bookings.",
       },
       {
         title: "Reviews",
@@ -44,9 +44,9 @@ export const adminNavItems: navItem[] = [
         description: "Read and respond to customer reviews.",
       },
       {
-        title: "My Orders",
-        href: "/dashboard/my-orders",
-        description: "Track your order history and status.",
+        title: "My Bookings",
+        href: "/dashboard/my-bookings",
+        description: "Track your booking history and status.",
       },
     ],
   },
@@ -66,8 +66,8 @@ export const userNavItems: navItem[] = [
     href: "/",
   },
   {
-    label: "Products",
-    href: "/products",
+    label: "Meeting Room",
+    href: "/meeting-room",
   },
   {
     label: "Dashboard",
@@ -78,9 +78,9 @@ export const userNavItems: navItem[] = [
         description: "View and edit your personal information.",
       },
       {
-        title: "My Orders",
-        href: "/dashboard/my-orders",
-        description: "Track your order history and status.",
+        title: "My Bookings",
+        href: "/dashboard/my-bookings",
+        description: "Track your booking history and status.",
       },
       {
         title: "Carts",
@@ -90,7 +90,7 @@ export const userNavItems: navItem[] = [
       {
         title: "Ratings",
         href: "/dashboard/ratings",
-        description: "Rate and review purchased products.",
+        description: "Rate and review purchased rooms.",
       },
     ],
   },

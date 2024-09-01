@@ -1,44 +1,24 @@
-import asus from "@/assets/brand/asus.png";
-import corsair from "@/assets/brand/CORSAIRLogo2020_stack_K.avif";
-import dasKeyboard from "@/assets/brand/icon.png";
-import logitech from "@/assets/brand/logitexh.webp";
-import prestigio from "@/assets/brand/prestigio.avif";
-import razer from "@/assets/brand/razer.webp";
-import steelseries from "@/assets/brand/steelseries.png";
-import varmilo from "@/assets/brand/Varmilo.png";
+import room1 from "@/assets/images/feature-one.jpg";
+import room2 from "@/assets/images/feature-two.jpg";
+import room3 from "@/assets/images/feature-three.jpg";
+import room4 from "@/assets/images/feature-four.jpg";
 
 export const featureCardData = [
   {
-    image: corsair,
-    name: "Corsair",
+    image: room1,
+    name: "Top Rated",
   },
   {
-    image: logitech,
-    name: "Logitech",
+    image: room2,
+    name: "Tech Setups",
   },
   {
-    image: razer,
-    name: "Razer",
+    image: room3,
+    name: "Flexible Layouts",
   },
   {
-    image: steelseries,
-    name: "Steelseries",
-  },
-  {
-    image: dasKeyboard,
-    name: "Das Keyboard",
-  },
-  {
-    image: varmilo,
-    name: "Varmilo",
-  },
-  {
-    image: prestigio,
-    name: "Prestigio",
-  },
-  {
-    image: asus,
-    name: "Asus",
+    image: room4,
+    name: "Elegant Design",
   },
 ];
 

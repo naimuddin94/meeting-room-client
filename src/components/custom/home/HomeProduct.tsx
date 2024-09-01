@@ -20,7 +20,7 @@ const HomeProduct = () => {
   return (
     <Container>
       <section className="space-y-8 my-8">
-        <Heading>Top Keyboards</Heading>
+      <Heading>Top Rated Rooms</Heading>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {data?.data?.result?.map((product: TProduct) => (
             <ProductCard product={product} key={product._id} />

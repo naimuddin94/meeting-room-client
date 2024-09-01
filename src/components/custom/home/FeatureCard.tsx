@@ -11,17 +11,9 @@ const FeatureCard = ({ name, image }: TFeatureCardProps) => {
           src={image}
           width="100"
           height="50"
-          alt="Keychron Logo"
-          className="aspect-[2/1] dark:invert overflow-hidden rounded-lg object-contain object-center"
+          alt="Feature Image"
+          className="aspect-[2/1] dark:invert overflow-hidden rounded-lg object-cover object-center"
         />
-        {/* <div className="relative inline-block p-3">
-          <img
-            src={image}
-            alt="Image"
-            className="block dark:invert aspect-[2/1] overflow-hidden rounded-lg object-contain object-center"
-          />
-          <div className="absolute inset-0 bg-muted opacity-20 rounded-lg"></div>
-        </div> */}
         <span className="text-sm font-medium">{name}</span>
       </div>
     </div>

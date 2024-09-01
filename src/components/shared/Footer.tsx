@@ -21,8 +21,8 @@ export default function Footer() {
               <h3 className="text-lg font-bold">SpaceBooth</h3>
             </Link>
             <p className="text-sm">
-              Discover the perfect mechanical keyboard for your setup. Explore
-              our wide selection of high-quality, customizable keyboards.
+              Join our community and never miss an update. Stay informed about
+              our latest rooms, exclusive offers, and upcoming events.
             </p>
           </div>
           <div className="grid gap-2">
@@ -34,7 +34,7 @@ export default function Footer() {
               Terms of Service
             </a>
             <a href="#" className="text-sm hover:underline">
-              Shipping & Returns
+              Refund Policy
             </a>
           </div>
           <div className="grid gap-2">
@@ -60,7 +60,7 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <MailIcon className="h-4 w-4" />
               <a href="#" className="text-sm hover:underline">
-                support@keebshop.com
+                support@spacebooth.com
               </a>
             </div>
             <div className="flex items-center gap-4">
@@ -92,7 +92,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t pt-6 text-center text-xs">
-          <p>&copy; 2024 Keeb Shop. All rights reserved.</p>
+          <p>&copy; 2024 Spacebooth. All rights reserved.</p>
         </div>
       </footer>
     </Container>

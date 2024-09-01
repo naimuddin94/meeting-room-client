@@ -27,9 +27,9 @@ const Banner = () => {
         <div className="absolute top-0 right-0 w-full h-full z-10 bg-gradient-to-r from-black/80 to-black/5"></div>
 
         {/* Carousel for Background Images */}
-        <Carousel className="w-full h-full absolute inset-0">
+        <Carousel className="w-full h-full absolute inset-0 overflow-hidden">
           <CarouselContent
-            className="w-full h-full absolute inset-0 transition-transform duration-1000 ease-in-out"
+            className="w-[102%] h-full absolute inset-0 transition-transform duration-1000 ease-in-out"
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
@@ -49,7 +49,7 @@ const Banner = () => {
 
         {/* Banner content */}
         <div className="md:w-1/2 space-y-5 py-8 absolute z-20">
-          <h1 className="text-white text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h1 className="text-white first-letter:text-theme text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Find Your Perfect Space for Meetings
           </h1>
           <p className="pb-5 text-white/80">

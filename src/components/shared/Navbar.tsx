@@ -1,4 +1,3 @@
-import logo from "@/assets/images/logo.svg";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useLogoutMutation } from "@/redux/features/auth/authApi";
@@ -10,6 +9,7 @@ import { useEffect, useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Logo from "../ui/Logo";
 import { toast } from "../ui/use-toast";
 import Container from "./Container";
 import NavMenus from "./NavMenus";
@@ -66,10 +66,12 @@ function Navbar() {
           </SheetTrigger>
           <SheetContent side="left" className="lg:hidden">
             <nav className="flex flex-col justify-between">
-              <div className="flex items-center">
-                <img src={logo} alt="Logo image" className="w-12" />
-                <h3 className="text-lg font-bold">SpaceBooth</h3>
-              </div>
+              <Link to="/" className="cursor-pointer">
+                <div className="flex items-center">
+                  <Logo />
+                  <h3 className="text-lg font-bold">SpaceBooth</h3>
+                </div>
+              </Link>
               <div>
                 <NavMenus />
               </div>
@@ -123,10 +125,12 @@ function Navbar() {
       </Container>
       <Container>
         <nav className="hidden lg:flex justify-between items-center">
-          <div className="flex items-center">
-            <img src={logo} alt="Logo image" className="w-12" />
-            <h3 className="text-lg font-bold">SpaceBooth</h3>
-          </div>
+          <Link to="/" className="cursor-pointer">
+            <div className="flex items-center">
+              <Logo />
+              <h3 className="text-lg font-bold">SpaceBooth</h3>
+            </div>
+          </Link>
           <div>
             <NavMenus />
           </div>

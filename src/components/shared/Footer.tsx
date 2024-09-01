@@ -1,4 +1,3 @@
-import logo from "@/assets/images/logo.svg";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -7,7 +6,9 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from "lucide-react";
+import Logo from "../ui/Logo";
 import Container from "./Container";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -15,10 +16,10 @@ export default function Footer() {
       <footer className="py-12 text-muted-foreground">
         <div className="mx-auto grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col items-start gap-4">
-            <a href="#" className="flex items-center gap-2">
-              <img src={logo} alt="Logo image" className="w-10" />
-              <span className="text-lg font-semibold">Keeb Shop</span>
-            </a>
+            <Link to="/" className="flex items-center gap-2">
+              <Logo />
+              <h3 className="text-lg font-bold">SpaceBooth</h3>
+            </Link>
             <p className="text-sm">
               Discover the perfect mechanical keyboard for your setup. Explore
               our wide selection of high-quality, customizable keyboards.

@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg
+const Logo = () => {
+  return (
+    <svg
       width="50"
       height="50"
       xmlns="http://www.w3.org/2000/svg"
@@ -40,3 +41,7 @@
         strokeDasharray="4 2"
       />
     </svg>
+  );
+};
+
+export default Logo;

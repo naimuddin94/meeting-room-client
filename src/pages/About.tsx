@@ -2,7 +2,7 @@ import Container from "@/components/shared/Container";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import aboutPageImage from "@/assets/images/fantastic_key.png";
+import aboutPageImage from "@/assets/images/hero-two.jpg";
 import user1 from "@/assets/images/user-1.jpg"
 import user2 from "@/assets/images/user-2.jpg"
 import user3 from "@/assets/images/user-3.jpg"
@@ -18,11 +18,11 @@ function About() {
           <div className="grid max-w-[1300px] items-center mx-auto gap-4 px-4 sm:px-6 md:px-10 md:grid-cols-2 md:gap-16">
             <div>
               <h1 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
-                Mechanical Keyboard Shop
+                Meeting Room Booking System
               </h1>
               <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                Discover the best mechanical keyboards for your typing and
-                gaming needs.
+                Simplify the process of finding and booking the perfect meeting
+                room for your business needs.
               </p>
               <div className="mt-6">
                 <Link
@@ -51,34 +51,33 @@ function About() {
                 Our Story
               </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                At Mechanical Keyboard Shop, we are passionate about providing
-                the best mechanical keyboards for our customers. Our journey
-                began with a simple love for the satisfying click-clack of
-                mechanical switches, and we've since dedicated ourselves to
-                curating a collection of the finest keyboards on the market.
+                At Meeting Room Booking System, we aim to provide a seamless and
+                efficient way for businesses to manage their meeting spaces. Our
+                platform offers a range of features designed to make booking and
+                managing rooms easier than ever before.
               </p>
             </div>
           </div>
           <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
             <div className="grid gap-1">
-              <h3 className="text-lg font-bold">Unparalleled Quality</h3>
+              <h3 className="text-lg font-bold">Ease of Use</h3>
               <p className="text-sm text-muted-foreground">
-                We source our keyboards from the top manufacturers, ensuring
-                exceptional build quality and performance.
+                Our user-friendly interface ensures that booking a room is quick
+                and hassle-free.
               </p>
             </div>
             <div className="grid gap-1">
-              <h3 className="text-lg font-bold">Customization Options</h3>
+              <h3 className="text-lg font-bold">Flexible Scheduling</h3>
               <p className="text-sm text-muted-foreground">
-                Personalize your keyboard with a wide range of keycaps,
-                switches, and accessories.
+                Manage bookings and availability with ease, adapting to your
+                organization's needs.
               </p>
             </div>
             <div className="grid gap-1">
               <h3 className="text-lg font-bold">Dedicated Support</h3>
               <p className="text-sm text-muted-foreground">
-                Our knowledgeable team is here to assist you with any questions
-                or concerns.
+                Our support team is always ready to assist you with any queries
+                or technical issues.
               </p>
             </div>
           </div>
@@ -92,9 +91,9 @@ function About() {
                 Meet the Team
               </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Our team of passionate keyboard enthusiasts is dedicated to
-                providing you with the best possible shopping experience. Get to
-                know the people behind our mechanical keyboard shop.
+                Our dedicated team is committed to providing the best experience
+                for our users. Get to know the professionals who make it all
+                happen.
               </p>
             </div>
           </div>
@@ -139,8 +138,8 @@ function About() {
               What Our Customers Say
             </h2>
             <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Hear from our satisfied customers about their experiences with our
-              mechanical keyboards.
+              Discover what our satisfied clients have to say about their
+              experience with our meeting room booking system.
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -160,10 +159,9 @@ function About() {
                     </div>
                   </div>
                   <p className="text-muted-foreground">
-                    "I absolutely love my new mechanical keyboard from\n
-                    Mechanical Keyboard Shop. The build quality is\n
-                    exceptional, and the typing experience is unparalleled.\n
-                    Highly recommended!"
+                    "The Meeting Room Booking System has revolutionized how we
+                    manage our meeting spaces. It's intuitive and has saved us a
+                    lot of time and effort."
                   </p>
                 </div>
               </CardContent>
@@ -184,10 +182,9 @@ function About() {
                     </div>
                   </div>
                   <p className="text-muted-foreground">
-                    "I've been using my Mechanical Keyboard Shop keyboard for\n
-                    months now, and it's been a game-changer for my\n
-                    productivity. The customization options are endless, and\n
-                    the customer support is top-notch."
+                    "We've been using the system for several months now, and it
+                    has made booking and managing our meeting rooms so much
+                    easier. Highly recommend it!"
                   </p>
                 </div>
               </CardContent>

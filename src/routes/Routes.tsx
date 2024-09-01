@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/add-product",
+        path: "/dashboard/add-room",
         element: (
           <ProtectedRoute roles={["admin"]}>
             <AddProduct />
@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/add-brand",
+        path: "/dashboard/slots",
         element: (
           <ProtectedRoute roles={["admin"]}>
             <AddBrand />,

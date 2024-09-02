@@ -63,7 +63,7 @@ function Contact() {
                 </div>
                 <div className="flex items-center gap-2">
                   <ClockIcon className="h-5 w-5 text-muted-foreground" />
-                  <p>Mon-Fri: 9am - 5pm</p>
+                  <p>Mon-Fri: 9am - 11pm</p>
                 </div>
               </div>
             </div>

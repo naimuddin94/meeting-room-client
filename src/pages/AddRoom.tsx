@@ -9,38 +9,29 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+import MultiSelect from "@/components/ui/MultiSelect";
 import { toast } from "@/components/ui/use-toast";
-import { useFetchBrandsQuery } from "@/redux/api/brandApi";
-import {
-  useAddProductMutation,
-  useFetchSingleProductQuery,
-  useUpdateProductMutation,
-} from "@/redux/api/productApi";
-import { TBrand } from "@/Types";
+import { useFetchSingleProductQuery } from "@/redux/api/productApi";
+import { useAddRoomMutation, useUpdateRoomMutation } from "@/redux/api/roomApi";
+import { amenitiesOptions } from "@/utils";
 import { jsonToFormData } from "@/utils/formDataBuilder";
 import { UploadIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-function AddProduct() {
+function AddRoom() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [brand, setBrand] = useState<string>("");
+  const [amenities, setAmenities] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | ArrayBuffer | null>(
     null
   );
 
-  const { data: productData, isLoading } = useFetchSingleProductQuery(id);
+  const { data: productData, isLoading } = useFetchSingleProductQuery(id, {
+    skip: !id,
+  });
 
   const {
     register,
@@ -61,34 +52,39 @@ function AddProduct() {
     }
   };
 
-  const [addProductFn] = useAddProductMutation();
-  const [updateProductFn] = useUpdateProductMutation();
+  const [addRoomFn] = useAddRoomMutation();
+  const [updateRoomFn] = useUpdateRoomMutation();
 
   // Discard form
   const handleDiscard = () => {
     setPreviewUrl(null);
     setSelectedImage(null);
-    setBrand("");
+    setAmenities([]);
     reset();
   };
 
   useEffect(() => {
     if (id) {
-      setBrand(productData?.data?.brand?.name);
       setPreviewUrl(productData?.data?.image);
     } else {
       handleDiscard();
     }
   }, [id]);
 
-  const { data, isLoading: BrandLoading } = useFetchBrandsQuery({});
-
   // Save a new product to the database
   const onSubmit = async (data: FieldValues) => {
-    const newProductData: Record<string, unknown> = { ...data, brand };
+    const { roomNo, floorNo, pricePerSlot, capacity, name } = data;
+    const newRoomData: Record<string, unknown> = {
+      roomNo: Number(roomNo),
+      floorNo: Number(floorNo),
+      pricePerSlot: Number(pricePerSlot),
+      capacity: Number(capacity),
+      name,
+      amenities,
+    };
 
     if (selectedImage) {
-      newProductData.image = selectedImage;
+      newRoomData.image = selectedImage;
     }
 
     if (!id) {
@@ -98,23 +94,16 @@ function AddProduct() {
           duration: 2000,
         });
       }
-
-      if (!brand) {
-        return toast({
-          title: "Brand is required",
-          duration: 2000,
-        });
-      }
     }
 
-    let productFormData: Record<string, unknown> | FormData = newProductData;
+    let roomFormData: Record<string, unknown> | FormData = newRoomData;
 
     if (selectedImage) {
-      productFormData = jsonToFormData(newProductData);
+      roomFormData = jsonToFormData(newRoomData);
     }
 
     if (id) {
-      await updateProductFn({ id, updateProduct: productFormData })
+      await updateRoomFn({ id, updateProduct: roomFormData })
         .unwrap()
         .then((res) => {
           if (res?.statusCode === 200) {
@@ -125,7 +114,6 @@ function AddProduct() {
             reset();
             setPreviewUrl(null);
             setSelectedImage(null);
-            setBrand("");
             navigate(-1);
           }
         })
@@ -136,9 +124,10 @@ function AddProduct() {
           });
         });
     } else {
-      await addProductFn(productFormData)
+      await addRoomFn(roomFormData)
         .unwrap()
         .then((res) => {
+          console.log(res);
           if (res?.statusCode === 201) {
             toast({
               title: res?.message,
@@ -147,10 +136,11 @@ function AddProduct() {
             reset();
             setPreviewUrl(null);
             setSelectedImage(null);
-            setBrand("");
+            setAmenities([]);
           }
         })
         .catch((error) => {
+          console.log(error);
           toast({
             title: error?.data?.message,
             duration: 2000,
@@ -159,7 +149,7 @@ function AddProduct() {
     }
   };
 
-  if (BrandLoading || (id && isLoading)) {
+  if (id && isLoading) {
     return <Loader size={300} />;
   }
 
@@ -170,17 +160,15 @@ function AddProduct() {
     >
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold tracking-tight">
-          {id ? "Update Product" : "Add New Product"}
+          {id ? "Update Room" : "Add New Room"}
         </h1>
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div className="col-span-2 lg:col-span-1">
           <Card>
             <CardHeader>
-              <CardTitle>Product Image</CardTitle>
-              <CardDescription>
-                Upload an image for your product.
-              </CardDescription>
+              <CardTitle>Room Image</CardTitle>
+              <CardDescription>Upload an image for your room.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4">
@@ -217,9 +205,9 @@ function AddProduct() {
         <div className="col-span-2 lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Product Details</CardTitle>
+              <CardTitle>Room Details</CardTitle>
               <CardDescription>
-                Fill in the details for your new product.
+                Fill in the details for your new room.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -232,8 +220,21 @@ function AddProduct() {
                     })}
                     id="name"
                     type="text"
-                    placeholder="Enter product name"
+                    placeholder="Enter room name"
                     defaultValue={id ? productData?.data?.name : ""}
+                  />
+                  {errors.name && (
+                    <span className="text-theme text-xs">
+                      {errors?.name?.message as string}
+                    </span>
+                  )}
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="brand">Amenities</Label>
+                  <MultiSelect
+                    options={amenitiesOptions}
+                    onValueChange={setAmenities}
+                    defaultValue={amenities}
                   />
                   {errors.name && (
                     <span className="text-theme text-xs">
@@ -241,107 +242,74 @@ function AddProduct() {
                     </span>
                   )}
                 </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea
-                    {...register("description", {
-                      required: "Description is required",
-                    })}
-                    id="description"
-                    placeholder="Enter product description"
-                    className="min-h-[120px]"
-                    defaultValue={id ? productData?.data?.description : ""}
-                  />
-                  {errors.description && (
-                    <span className="text-theme text-xs">
-                      {errors.description.message as string}
-                    </span>
-                  )}
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="brand">Brand</Label>
-                  <Select
-                    onValueChange={(value) => setBrand(value)}
-                    value={brand}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select brand" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {data?.data?.result?.map((brand: TBrand) => (
-                        <SelectItem key={brand._id} value={brand.name}>
-                          {brand.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
                 <div className="grid sm:grid-cols-2 gap-2">
                   <div className="grid gap-2">
-                    <Label htmlFor="material">Material</Label>
+                    <Label htmlFor="material">Capacity</Label>
                     <Input
-                      {...register("material", {
-                        required: "Material is required",
+                      {...register("capacity", {
+                        required: "Capacity is required",
                       })}
+                      type="number"
                       id="material"
-                      placeholder="Enter product material"
+                      placeholder="Enter room capacity"
                       defaultValue={id ? productData?.data?.material : ""}
                     />
                     {errors.price && (
                       <span className="text-theme text-xs">
-                        {errors.price.message as string}
+                        {errors?.capacity?.message as string}
                       </span>
                     )}
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="weight">Weight</Label>
+                    <Label htmlFor="weight">Price Per-slot</Label>
                     <Input
-                      {...register("weight", {
+                      {...register("pricePerSlot", {
                         required: "Weight is required",
                       })}
+                      type="number"
                       id="weight"
-                      placeholder="Product weight with grams"
+                      placeholder="Enter price per slot"
                       defaultValue={id ? productData?.data?.weight : ""}
                     />
                     {errors.stock && (
                       <span className="text-theme text-xs">
-                        {errors.stock.message as string}
+                        {errors?.pricePerSlot?.message as string}
                       </span>
                     )}
                   </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-2">
                   <div className="grid gap-2">
-                    <Label htmlFor="price">Price</Label>
+                    <Label htmlFor="price">Room Number</Label>
                     <Input
-                      {...register("price", {
-                        required: "Price is required",
+                      {...register("roomNo", {
+                        required: "Room number is required",
                       })}
-                      id="price"
                       type="number"
-                      placeholder="Enter product price"
+                      id="price"
+                      placeholder="Enter room number"
                       defaultValue={id ? productData?.data?.price : ""}
                     />
                     {errors.price && (
                       <span className="text-theme text-xs">
-                        {errors.price.message as string}
+                        {errors?.roomNo?.message as string}
                       </span>
                     )}
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="stock">Stock</Label>
+                    <Label htmlFor="stock">Floor Number</Label>
                     <Input
-                      {...register("stock", {
-                        required: "Stock is required",
+                      {...register("floorNo", {
+                        required: "Floor number is required",
                       })}
-                      id="stock"
                       type="number"
-                      placeholder="Enter product stock"
+                      id="stock"
+                      placeholder="Enter floor number"
                       defaultValue={id ? productData?.data?.stock : ""}
                     />
                     {errors.stock && (
                       <span className="text-theme text-xs">
-                        {errors.stock.message as string}
+                        {errors?.floorNo?.message as string}
                       </span>
                     )}
                   </div>
@@ -361,9 +329,9 @@ function AddProduct() {
           {isSubmitting ? (
             <Loader size={28} />
           ) : id ? (
-            "Update Product"
+            "Update Room"
           ) : (
-            "Save Product"
+            "Save Room"
           )}
         </Button>
       </div>
@@ -371,4 +339,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default AddRoom;

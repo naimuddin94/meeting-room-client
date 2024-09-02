@@ -1,7 +1,7 @@
-import room1 from "@/assets/images/feature-one.jpg";
-import room2 from "@/assets/images/feature-two.jpg";
-import room3 from "@/assets/images/feature-three.jpg";
 import room4 from "@/assets/images/feature-four.jpg";
+import room1 from "@/assets/images/feature-one.jpg";
+import room3 from "@/assets/images/feature-three.jpg";
+import room2 from "@/assets/images/feature-two.jpg";
 
 export const featureCardData = [
   {
@@ -41,3 +41,48 @@ export function truncate(paragraph: string, wordLimit: number) {
 
   return truncatedWords;
 }
+
+export const amenitiesOptions = [
+  { label: "Wifi", value: "Wifi" },
+  { label: "Whiteboards", value: "Whiteboards" },
+  { label: "Catering Services", value: "Catering Services" },
+  { label: "Tech Support", value: "Tech Support" },
+  { label: "Reception Services", value: "Reception Services" },
+  { label: "24/7 Access", value: "24/7 Access" },
+  { label: "Parking", value: "Parking" },
+  { label: "Interactive Touchscreens", value: "Interactive Touchscreens" },
+  { label: "Telephony Services", value: "Telephony Services" },
+  { label: "Smart Room Controls", value: "Smart Room Controls" },
+  { label: "Soundproofing", value: "Soundproofing" },
+  { label: "High-Speed Internet", value: "High-Speed Internet" },
+  { label: "Video Conferencing", value: "Video Conferencing" },
+  { label: "Natural Lighting", value: "Natural Lighting" },
+  { label: "Customizable Room Layouts", value: "Customizable Room Layouts" },
+  { label: "Refreshment Stations", value: "Refreshment Stations" },
+  { label: "Presentation Tools", value: "Presentation Tools" },
+  { label: "Room Scheduling Display", value: "Room Scheduling Display" },
+  { label: "Storage Solutions", value: "Storage Solutions" },
+  { label: "Power Outlets", value: "Power Outlets" },
+  { label: "USB Charging Ports", value: "USB Charging Ports" },
+  { label: "Guest Wi-Fi", value: "Guest Wi-Fi" },
+  { label: "Surveillance & Security", value: "Surveillance & Security" },
+  { label: "Emergency Equipment", value: "Emergency Equipment" },
+  { label: "Mobile App Integration", value: "Mobile App Integration" },
+  { label: "Room Customization Options", value: "Room Customization Options" },
+  {
+    label: "Personalized Welcome Signage",
+    value: "Personalized Welcome Signage",
+  },
+  { label: "VR Setup", value: "VR Setup" },
+  {
+    label: "Health & Wellness Facilities",
+    value: "Health & Wellness Facilities",
+  },
+  {
+    label: "Green & Sustainable Options",
+    value: "Green & Sustainable Options",
+  },
+  { label: "On-Site Support Staff", value: "On-Site Support Staff" },
+  { label: "Flexible Booking", value: "Flexible Booking" },
+  { label: "Lounge Area", value: "Lounge Area" },
+];

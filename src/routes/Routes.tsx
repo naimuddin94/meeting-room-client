@@ -1,8 +1,8 @@
 import MainLayout from "@/components/layout/MainLayout";
 import PaymentElement from "@/components/payment/PaymentElement";
 import About from "@/pages/About";
-import AddBrand from "@/pages/AddBrand";
-import AddProduct from "@/pages/AddProduct";
+import AddRoom from "@/pages/AddRoom";
+import AddSlot from "@/pages/AddSlot";
 import CartPage from "@/pages/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
 import Contact from "@/pages/Contact";
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/products",
+        path: "/meeting-room",
         element: <Products />,
       },
       {
@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/add-room",
         element: (
           <ProtectedRoute roles={["admin"]}>
-            <AddProduct />
+            <AddRoom />
           </ProtectedRoute>
         ),
       },
@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/edit-product/:id",
         element: (
           <ProtectedRoute roles={["admin"]}>
-            <AddProduct />,
+            <AddRoom />,
           </ProtectedRoute>
         ),
       },
@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/slots",
         element: (
           <ProtectedRoute roles={["admin"]}>
-            <AddBrand />,
+            <AddSlot />,
           </ProtectedRoute>
         ),
       },

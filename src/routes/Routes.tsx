@@ -13,8 +13,8 @@ import ManageProduct from "@/pages/MangeProduct";
 import MyOrders from "@/pages/MyOrders";
 import NotFound from "@/pages/NotFound";
 import ProductDetail from "@/pages/Productdetail";
-import Products from "@/pages/Products";
 import Register from "@/pages/Register";
+import Rooms from "@/pages/Rooms";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/meeting-room",
-        element: <Products />,
+        element: <Rooms />,
       },
       {
         path: "/about-us",

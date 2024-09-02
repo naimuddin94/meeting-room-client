@@ -2,31 +2,31 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // fetchProducts: builder.query({
-    //   query: (param) => {
-    //     const params = new URLSearchParams();
+    fetchAllRooms: builder.query({
+      query: (param) => {
+        const params = new URLSearchParams();
 
-    //     for (const key in param) {
-    //       params.append(key, param[key]);
-    //     }
+        for (const key in param) {
+          params.append(key, param[key]);
+        }
 
-    //     return {
-    //       url: "/products",
-    //       method: "GET",
-    //       params: params,
-    //     };
-    //   },
-    //   providesTags: ["product"],
-    // }),
-    // fetchSingleProduct: builder.query({
-    //   query: (id) => {
-    //     return {
-    //       url: `/products/${id}`,
-    //       method: "GET",
-    //     };
-    //   },
-    //   providesTags: ["product"],
-    // }),
+        return {
+          url: "/rooms",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["room"],
+    }),
+    fetchSingleRoom: builder.query({
+      query: (id) => {
+        return {
+          url: `/rooms/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["room"],
+    }),
     addRoom: builder.mutation({
       query: (data) => ({
         url: "/rooms",
@@ -43,14 +43,20 @@ const roomApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["product"],
     }),
-    // deleteProducts: builder.mutation({
-    //   query: (id) => ({
-    //     url: `/products/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["product"],
-    // }),
+    deleteRoom: builder.mutation({
+      query: (id) => ({
+        url: `/rooms/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["room"],
+    }),
   }),
 });
 
-export const { useAddRoomMutation, useUpdateRoomMutation } = roomApi;
+export const {
+  useFetchAllRoomsQuery,
+  useFetchSingleRoomQuery,
+  useAddRoomMutation,
+  useUpdateRoomMutation,
+  useDeleteRoomMutation,
+} = roomApi;

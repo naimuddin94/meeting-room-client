@@ -95,3 +95,24 @@ export type TFetchOrder = {
   updatedAt: string;
 };
 
+export interface IRoom {
+  _id: string;
+  name: string;
+  roomNo: number;
+  image: string;
+  floorNo: number;
+  capacity: number;
+  pricePerSlot: number;
+  amenities: string[];
+  status: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPage: number;
+}

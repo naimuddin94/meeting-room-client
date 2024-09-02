@@ -1,8 +1,12 @@
 import { baseApi } from "@/redux/api/baseApi";
+import { IRoom, TDataWithMeta, TResponse } from "@/Types";
 
 const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchAllRooms: builder.query({
+    fetchAllRooms: builder.query<
+      TResponse<TDataWithMeta<IRoom>>,
+      Record<string, string>
+    >({
       query: (param) => {
         const params = new URLSearchParams();
 
@@ -18,7 +22,7 @@ const roomApi = baseApi.injectEndpoints({
       },
       providesTags: ["room"],
     }),
-    fetchSingleRoom: builder.query({
+    fetchSingleRoom: builder.query<TResponse<IRoom>, string>({
       query: (id) => {
         return {
           url: `/rooms/${id}`,

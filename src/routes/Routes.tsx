@@ -12,8 +12,8 @@ import ManageOrders from "@/pages/ManageOrders";
 import ManageProduct from "@/pages/MangeProduct";
 import MyOrders from "@/pages/MyOrders";
 import NotFound from "@/pages/NotFound";
-import ProductDetail from "@/pages/Productdetail";
 import Register from "@/pages/Register";
+import RoomDetails from "@/pages/RoomDetails";
 import Rooms from "@/pages/Rooms";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
@@ -89,8 +89,8 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/product/:id",
-        element: <ProductDetail />,
+        path: "/room/:id",
+        element: <RoomDetails />,
       },
       {
         path: "/dashboard/carts",

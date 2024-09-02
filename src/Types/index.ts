@@ -110,9 +110,21 @@ export interface IRoom {
   updatedAt: string;
 }
 
-export interface IMeta {
+export type TMeta = {
   page: number;
   limit: number;
   total: number;
   totalPage: number;
-}
+};
+
+export type TResponse<T> = {
+  statusCode: number;
+  data: T;
+  message: string;
+  success: boolean;
+};
+
+export type TDataWithMeta<T> = {
+  meta: TMeta;
+  result: T[];
+};

@@ -27,7 +27,9 @@ function RoomDetails() {
     if (!token) {
       return navigate("/login");
     } else if (token) {
-      return navigate(`/dashboard/checkout/${id}`);
+      return navigate(`/dashboard/checkout/${id}`, {
+        state: { pricePerSlot: roomData?.data?.pricePerSlot },
+      });
     }
     toast({
       title: "Add to cart successfully",

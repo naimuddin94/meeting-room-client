@@ -20,7 +20,9 @@ function RoomCard({ room }: { room: IRoom }) {
     if (!token) {
       return navigate("/login");
     } else if (token) {
-      return navigate(`/dashboard/checkout/${id}`);
+      return navigate(`/dashboard/checkout/${id}`, {
+        state: { pricePerSlot },
+      });
     }
     toast({
       title: "Add to cart successfully",

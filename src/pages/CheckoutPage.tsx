@@ -9,16 +9,18 @@ import MultiSelect from "@/components/ui/MultiSelect";
 import { useFetchSingleRoomQuery } from "@/redux/api/roomApi";
 import { slotApi, useFetchAvailableSlotsQuery } from "@/redux/api/slotApi";
 import { currentUser } from "@/redux/features/auth/authSlice";
-import { currentCart } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { formatDateString } from "@/utils";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 function CheckoutPage() {
   const [slotIds, setSlotIds] = useState<string[]>([]);
+  const [total, setTotal] = useState(0);
   const [date, setDate] = useState("");
   const { id } = useParams();
+  const { state } = useLocation();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -31,17 +33,7 @@ function CheckoutPage() {
     { skip: !id || !date }
   );
 
-  const cart = useAppSelector(currentCart);
   const user = useAppSelector(currentUser);
-
-  const discount = 0 * cart.totalAmount;
-  const tax = 0 * cart.totalAmount;
-  const total = cart.totalAmount - discount + tax;
-
-  const orders = cart.products.map((item) => ({
-    product: item._id,
-    quantity: item.quantity,
-  }));
 
   const handlePayment = (price: number) => {
     navigate("/payment", { state: { price } });
@@ -60,15 +52,26 @@ function CheckoutPage() {
     }
   }, [date]);
 
+  useEffect(() => {
+    // Clear cache and refetch slots when the date changes
+    if (slotIds) {
+      setTotal(slotIds?.length * state?.pricePerSlot);
+    }
+  }, [slotIds]);
+
   if (isLoading) {
     return <Loader size={200} />;
   }
 
   const onSubmit = async () => {
     console.log({ date, slotIds, id });
-
-    // reset();
-    // handlePayment(total);
+    const bookingData = {
+      date,
+      slots: slotIds,
+      room: id,
+      user: user?.userId,
+    };
+    handlePayment(total);
   };
 
   return (
@@ -160,15 +163,15 @@ function CheckoutPage() {
           <div className="mt-6">
             <div className="flex justify-between items-center">
               <span>Subtotal</span>
-              <span>${cart.totalAmount}</span>
+              <span>${total}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span>Shipping</span>
-              <span>Free</span>
+              <span>Discount</span>
+              <span>0</span>
             </div>
             <div className="flex justify-between items-center">
               <span>Tax</span>
-              <span>${tax}</span>
+              <span>Free</span>
             </div>
             <div className="flex justify-between items-center font-bold text-lg">
               <span>Total</span>

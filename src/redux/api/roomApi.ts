@@ -45,7 +45,7 @@ const roomApi = baseApi.injectEndpoints({
         method: "PUT",
         body: updateData,
       }),
-      invalidatesTags: ["product"],
+      invalidatesTags: ["room"],
     }),
     deleteRoom: builder.mutation({
       query: (id) => ({

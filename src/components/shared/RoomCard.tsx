@@ -6,25 +6,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { currentToken } from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { IRoom } from "@/Types";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "../ui/use-toast";
 
 function RoomCard({ room }: { room: IRoom }) {
-  const dispatch = useAppDispatch();
   const token = useAppSelector(currentToken);
   const navigate = useNavigate();
-
   const { _id, name, image, amenities, capacity, pricePerSlot } = room;
 
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const handleBooking = (id: string) => {
     if (!token) {
       return navigate("/login");
+    } else if (token) {
+      return navigate(`/dashboard/checkout/${id}`);
     }
-    // dispatch(addToCart({ _id, image, name, price, stock, quantity: 1 }));
     toast({
       title: "Add to cart successfully",
     });
@@ -53,26 +50,15 @@ function RoomCard({ room }: { room: IRoom }) {
               ))}
             </CardDescription>
             <CardTitle className="text-sm">Capacity: {capacity}</CardTitle>
-            {/* <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Room No:</TableHead>
-                  <TableHead>Floor No:</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">{roomNo}</TableCell>
-                  <TableCell>{floorNo}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table> */}
-            {/* <CardTitle className="text-sm">Room Number: {roomNo}</CardTitle>
-            <CardTitle className="text-sm">Floor Number: {floorNo}</CardTitle> */}
           </div>
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold">${pricePerSlot}</span>
-            <Button type="submit" onClick={handleAddToCart} variant="outline">
+
+            <Button
+              type="submit"
+              variant="outline"
+              onClick={() => handleBooking(_id)}
+            >
               Book Now
             </Button>
           </div>

@@ -128,3 +128,12 @@ export type TDataWithMeta<T> = {
   meta: TMeta;
   result: T[];
 };
+
+export type TSlot = {
+  _id: string;
+  room: IRoom;
+  date: string;
+  startTime: string;
+  endTime: string;
+  isBooked: boolean;
+};

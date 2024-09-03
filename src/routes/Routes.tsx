@@ -73,7 +73,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/edit-product/:id",
+        path: "/dashboard/edit-room/:id",
         element: (
           <ProtectedRoute roles={["admin"]}>
             <AddRoom />,
@@ -85,6 +85,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute roles={["admin"]}>
             <AddSlot />,
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/add-admin",
+        element: (
+          <ProtectedRoute roles={["admin"]}>
+            <Register />,
           </ProtectedRoute>
         ),
       },
@@ -101,7 +109,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/checkout",
+        path: "/dashboard/checkout/:id",
         element: (
           <ProtectedRoute roles={["admin", "user"]}>
             <CheckoutPage />

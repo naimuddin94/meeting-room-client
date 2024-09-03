@@ -42,6 +42,13 @@ export function truncate(paragraph: string, wordLimit: number) {
   return truncatedWords;
 }
 
+export function formatDateString(dateString: string) {
+  const [year, month, day] = dateString.split("-");
+  const formattedMonth = month.replace(/^0+/, ""); // Remove leading zero from month
+  const formattedDay = day.replace(/^0+/, ""); // Remove leading zero from day
+  return `${year}-${formattedMonth}-${formattedDay}`;
+}
+
 export const amenitiesOptions = [
   { label: "Wifi", value: "Wifi" },
   { label: "Whiteboards", value: "Whiteboards" },

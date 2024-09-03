@@ -39,9 +39,9 @@ export const adminNavItems: navItem[] = [
         description: "View and manage all customer bookings.",
       },
       {
-        title: "Reviews",
-        href: "/dashboard/reviews",
-        description: "Read and respond to customer reviews.",
+        title: "Add Admin",
+        href: "/dashboard/add-admin",
+        description: "Add administration user for management.",
       },
       {
         title: "My Bookings",

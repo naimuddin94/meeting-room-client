@@ -1,11 +1,12 @@
 import Container from "@/components/shared/Container";
 import Loader from "@/components/shared/Loader";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/components/ui/use-toast";
 import { useFetchSingleRoomQuery } from "@/redux/api/roomApi";
 import { currentToken, currentUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 function RoomDetails() {
@@ -13,7 +14,6 @@ function RoomDetails() {
   const user = useAppSelector(currentUser);
   const token = useAppSelector(currentToken);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const { data: roomData, isLoading } = useFetchSingleRoomQuery(id as string, {
     skip: !id,
@@ -23,11 +23,12 @@ function RoomDetails() {
     return <Loader size={200} />;
   }
 
-  const handleAddToCart = () => {
+  const handleBooking = (id: string) => {
     if (!token) {
       return navigate("/login");
+    } else if (token) {
+      return navigate(`/dashboard/checkout/${id}`);
     }
-    // dispatch(addToCart({ _id, image, name, price, stock, quantity: 1 }));
     toast({
       title: "Add to cart successfully",
     });
@@ -56,12 +57,13 @@ function RoomDetails() {
               <div className="space-x-4">
                 <Button
                   size="lg"
-                  onClick={handleAddToCart}
+                  onClick={() => handleBooking(id!)}
                   variant="outline"
                   className="mt-4"
                 >
-                  Add to Cart
+                  Book Now
                 </Button>
+
                 <Link to={`/dashboard/edit-room/${roomData?.data?._id}`}>
                   <Button size="lg" variant="secondary" className="mt-4">
                     Edit Room
@@ -69,7 +71,11 @@ function RoomDetails() {
                 </Link>
               </div>
             ) : (
-              <Button size="lg" onClick={handleAddToCart} className="mt-4">
+              <Button
+                size="lg"
+                onClick={() => handleBooking(id!)}
+                className="mt-4"
+              >
                 Book Now
               </Button>
             )}
@@ -114,14 +120,16 @@ function RoomDetails() {
             <TabsContent value="description">
               <div className="grid gap-4 py-6">
                 <div className="grid gap-2">
-                  <h2 className="text-xl font-bold">Room Features</h2>
-                  {roomData?.data?.amenities?.map(
-                    (paragraph: string, index: number) => (
-                      <div key={index}>
-                        <p className="text-muted-foreground">{paragraph}</p>
-                      </div>
-                    )
-                  )}
+                  <h2 className="text-xl font-bold">Amenities</h2>
+                  <div className="flex flex-wrap gap-3">
+                    {roomData?.data?.amenities?.map(
+                      (item: string, index: number) => (
+                        <div key={index} className="w-fit">
+                          <Badge variant="outline">{item}</Badge>
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
             </TabsContent>
@@ -133,41 +141,45 @@ function RoomDetails() {
                     <div className="grid gap-4">
                       <div className="grid gap-1">
                         <p className="font-medium">
-                          Does this keyboard have RGB lighting?
+                          How can I book a meeting room?
                         </p>
                         <p className="text-muted-foreground">
-                          Yes, many of our mechanical keyboards feature
-                          customizable RGB lighting.
+                          You can book a meeting room by selecting your
+                          preferred date and time on our platform, choosing an
+                          available room, and confirming your booking.
                         </p>
                       </div>
                       <div className="grid gap-1">
                         <p className="font-medium">
-                          What is the warranty on this keyboard?
+                          What amenities are included in the meeting rooms?
                         </p>
                         <p className="text-muted-foreground">
-                          We offer a 1-year warranty on all our mechanical
-                          keyboards, covering any manufacturing defects.
+                          Our meeting rooms come equipped with high-speed Wi-Fi,
+                          projectors, whiteboards, and conference phones.
+                          Additional amenities can be requested at the time of
+                          booking.
                         </p>
                       </div>
                     </div>
                     <div className="grid gap-4">
                       <div className="grid gap-1">
                         <p className="font-medium">
-                          Can I customize the keycaps on this keyboard?
+                          Can I cancel or modify my booking?
                         </p>
                         <p className="text-muted-foreground">
-                          Absolutely! Our mechanical keyboards support standard
-                          keycap sizes, making them compatible with most
-                          aftermarket keycap sets.
+                          Yes, you can cancel or modify your booking up to 24
+                          hours before the scheduled time without any charges.
+                          Changes within 24 hours may incur a fee.
                         </p>
                       </div>
                       <div className="grid gap-1">
                         <p className="font-medium">
-                          Does this keyboard have programmable keys?
+                          Are there any discounts for recurring bookings?
                         </p>
                         <p className="text-muted-foreground">
-                          Yes, our keyboards come with software that allows you
-                          to program keys and create custom macros.
+                          We offer discounts for recurring bookings. Please
+                          contact our support team for more details and to set
+                          up a recurring booking plan.
                         </p>
                       </div>
                     </div>

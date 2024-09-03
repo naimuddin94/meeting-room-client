@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { currentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { jsonToFormData } from "@/utils/formDataBuilder";
 import { LucideEye, LucideEyeOff } from "lucide-react";
 import { useState } from "react";
@@ -20,6 +22,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
+  const user = useAppSelector(currentUser);
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -35,7 +38,14 @@ function Register() {
   const onsubmit = async (data: FieldValues) => {
     const { files, ...remainData } = data;
 
-    const newUserData = { image: files[0], ...remainData };
+    const newUserData: Record<string, unknown> = {
+      image: files[0],
+      ...remainData,
+    };
+
+    if (user?.role == "admin") {
+      newUserData.role = "admin";
+    }
 
     const userFormData = jsonToFormData(newUserData);
 
@@ -65,7 +75,9 @@ function Register() {
         <form onSubmit={handleSubmit(onsubmit)}>
           <Card className="w-full max-w-md mx-auto">
             <CardHeader className="space-y-1 text-center">
-              <CardTitle className="text-2xl">Create an account</CardTitle>
+              <CardTitle className="text-2xl">
+                {user?.role === "admin" ? "Add Admin" : "Create an account"}
+              </CardTitle>
               <CardDescription>
                 Enter your details below to get started.
               </CardDescription>
@@ -138,12 +150,14 @@ function Register() {
               </div>
             </CardContent>
             <CardFooter className="flex items-center justify-between">
-              <Link
-                to="/login"
-                className="text-sm text-muted-foreground hover:underline"
-              >
-                Have an account? Login
-              </Link>
+              {user?.role !== "admin" && (
+                <Link
+                  to="/login"
+                  className="text-sm text-muted-foreground hover:underline"
+                >
+                  Have an account? Login
+                </Link>
+              )}
               <Button type="submit" variant="outline">
                 {isSubmitting ? <Loader size={28} /> : "Register"}
               </Button>

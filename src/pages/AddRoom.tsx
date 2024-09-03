@@ -11,8 +11,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import MultiSelect from "@/components/ui/MultiSelect";
 import { toast } from "@/components/ui/use-toast";
-import { useFetchSingleProductQuery } from "@/redux/api/productApi";
-import { useAddRoomMutation, useUpdateRoomMutation } from "@/redux/api/roomApi";
+import {
+  useAddRoomMutation,
+  useFetchSingleRoomQuery,
+  useUpdateRoomMutation,
+} from "@/redux/api/roomApi";
 import { amenitiesOptions } from "@/utils";
 import { jsonToFormData } from "@/utils/formDataBuilder";
 import { UploadIcon } from "lucide-react";
@@ -29,7 +32,7 @@ function AddRoom() {
     null
   );
 
-  const { data: productData, isLoading } = useFetchSingleProductQuery(id, {
+  const { data: roomData, isLoading } = useFetchSingleRoomQuery(id as string, {
     skip: !id,
   });
 
@@ -64,8 +67,9 @@ function AddRoom() {
   };
 
   useEffect(() => {
-    if (id) {
-      setPreviewUrl(productData?.data?.image);
+    if (id && roomData) {
+      setPreviewUrl(roomData?.data?.image);
+      setAmenities(roomData?.data?.amenities);
     } else {
       handleDiscard();
     }
@@ -103,7 +107,7 @@ function AddRoom() {
     }
 
     if (id) {
-      await updateRoomFn({ id, updateProduct: roomFormData })
+      await updateRoomFn({ id, updateData: roomFormData })
         .unwrap()
         .then((res) => {
           if (res?.statusCode === 200) {
@@ -221,7 +225,7 @@ function AddRoom() {
                     id="name"
                     type="text"
                     placeholder="Enter room name"
-                    defaultValue={id ? productData?.data?.name : ""}
+                    defaultValue={id ? roomData?.data?.name : ""}
                   />
                   {errors.name && (
                     <span className="text-theme text-xs">
@@ -249,10 +253,9 @@ function AddRoom() {
                       {...register("capacity", {
                         required: "Capacity is required",
                       })}
-                      type="number"
                       id="material"
                       placeholder="Enter room capacity"
-                      defaultValue={id ? productData?.data?.material : ""}
+                      defaultValue={id ? roomData?.data?.capacity : ""}
                     />
                     {errors.price && (
                       <span className="text-theme text-xs">
@@ -266,10 +269,9 @@ function AddRoom() {
                       {...register("pricePerSlot", {
                         required: "Weight is required",
                       })}
-                      type="number"
                       id="weight"
                       placeholder="Enter price per slot"
-                      defaultValue={id ? productData?.data?.weight : ""}
+                      defaultValue={id ? roomData?.data?.pricePerSlot : ""}
                     />
                     {errors.stock && (
                       <span className="text-theme text-xs">
@@ -285,10 +287,9 @@ function AddRoom() {
                       {...register("roomNo", {
                         required: "Room number is required",
                       })}
-                      type="number"
                       id="price"
                       placeholder="Enter room number"
-                      defaultValue={id ? productData?.data?.price : ""}
+                      defaultValue={id ? roomData?.data?.roomNo : ""}
                     />
                     {errors.price && (
                       <span className="text-theme text-xs">
@@ -302,10 +303,9 @@ function AddRoom() {
                       {...register("floorNo", {
                         required: "Floor number is required",
                       })}
-                      type="number"
                       id="stock"
                       placeholder="Enter floor number"
-                      defaultValue={id ? productData?.data?.stock : ""}
+                      defaultValue={id ? roomData?.data?.floorNo : ""}
                     />
                     {errors.stock && (
                       <span className="text-theme text-xs">

@@ -20,16 +20,16 @@ const HomeProduct = () => {
   return (
     <Container>
       <section className="space-y-8 my-8">
-      <Heading>Top Rated Rooms</Heading>
+        <Heading>Top Rated Rooms</Heading>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {data?.data?.result?.map((product: TProduct) => (
             <ProductCard product={product} key={product._id} />
           ))}
         </div>
         <div className="flex justify-center">
-          <Link to="/products">
+          <Link to="/meeting-room">
             <Button variant="outline" className="border-theme/30">
-              Show All Products
+              Show All Rooms
             </Button>
           </Link>
         </div>

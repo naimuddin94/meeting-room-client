@@ -2,11 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useLogoutMutation } from "@/redux/features/auth/authApi";
 import { currentUser, removeUser } from "@/redux/features/auth/authSlice";
-import { currentCart } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { MenuIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Logo from "../ui/Logo";
@@ -18,7 +16,6 @@ import { ThemeToggle } from "./ThemeToggle";
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const user = useAppSelector(currentUser);
-  const cart = useAppSelector(currentCart);
   const dispatch = useAppDispatch();
 
   const [logoutFn] = useLogoutMutation();
@@ -95,20 +92,6 @@ function Navbar() {
           <div className="lg:hidden flex items-center gap-5">
             {user ? (
               <>
-                <Link to="/dashboard/carts">
-                  <div className="relative">
-                    <Button variant="ghost">
-                      <MdOutlineShoppingCart size={20} />
-                    </Button>
-                    <span
-                      className={`absolute ${
-                        cart?.products?.length > 9 ? "right-0" : "right-2"
-                      }`}
-                    >
-                      {cart?.products?.length}
-                    </span>
-                  </div>
-                </Link>
                 <ThemeToggle />
                 <Avatar>
                   <AvatarImage src={user?.image} alt="user" />
@@ -137,20 +120,6 @@ function Navbar() {
           <div className="flex items-center gap-5">
             {user ? (
               <>
-                <Link to="/dashboard/carts">
-                  <div className="relative">
-                    <Button variant="ghost">
-                      <MdOutlineShoppingCart size={20} />
-                    </Button>
-                    <span
-                      className={`absolute ${
-                        cart.products.length > 9 ? "right-0" : "right-2"
-                      }`}
-                    >
-                      {cart.products.length}
-                    </span>
-                  </div>
-                </Link>
                 <ThemeToggle />
                 <Button onClick={handleLogout} variant="outline">
                   Logout

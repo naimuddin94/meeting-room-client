@@ -43,11 +43,15 @@ const AddSlot = () => {
 
   const onSubmit = async () => {
     setIsSubmitting(true);
-    const slotData = {room, date, startTime, endTime };
+    const slotData = { room, date, startTime, endTime };
     try {
       const res = await createSlotFn(slotData).unwrap();
       if (res?.statusCode === 201) {
         toast({ title: res?.message });
+        setDate("");
+        setStartTime("");
+        setEndTime("");
+        setRoom("");
       }
     } catch (error: any) {
       toast({ title: error?.data?.message });

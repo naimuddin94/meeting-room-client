@@ -47,9 +47,12 @@ function RoomCard({ room }: { room: IRoom }) {
             <CardTitle className="text-xl font-bold">{name}</CardTitle>
             <CardDescription className="text-muted-foreground">
               <p className="text-green-500">Features: </p>
-              {amenities.map((item, index) => (
+              {amenities?.slice(0, 8)?.map((item, index) => (
                 <span key={index}>{item}, </span>
               ))}
+              {amenities?.length > 8 && (
+                <span className="text-green-500">...more</span>
+              )}
             </CardDescription>
             <CardTitle className="text-sm">Capacity: {capacity}</CardTitle>
           </div>

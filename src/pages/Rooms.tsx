@@ -31,7 +31,7 @@ import { useState } from "react";
 function Rooms() {
   const [limit, setLimit] = useState("8");
   const [searchTerm, setSearchTerm] = useState("");
-  const [sort, setSort] = useState("stock");
+  const [sort, setSort] = useState("-createdAt");
   const [page, setPage] = useState(1);
   const { data, isLoading } = useFetchAllRoomsQuery({
     page,
@@ -86,19 +86,15 @@ function Rooms() {
                   <div className="grid gap-2">
                     <Label className="flex items-center gap-2">
                       <Checkbox value="Electronics" />
-                      Electronics
+                      Hi-speed Internet
                     </Label>
                     <Label className="flex items-center gap-2">
                       <Checkbox value="Bags" />
-                      Bags
+                      Catering Services
                     </Label>
                     <Label className="flex items-center gap-2">
                       <Checkbox value="Outdoor" />
-                      Outdoor
-                    </Label>
-                    <Label className="flex items-center gap-2">
-                      <Checkbox value="Accessories" />
-                      Accessories
+                      Smart Room Control
                     </Label>
                   </div>
                 </div>
@@ -138,15 +134,19 @@ function Rooms() {
               >
                 Latest
               </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem onClick={() => handleSort("price")}>
+              <DropdownMenuCheckboxItem
+                onClick={() => handleSort("pricePerSlot")}
+              >
                 Price: Low to High
               </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem onClick={() => handleSort("-price")}>
+              <DropdownMenuCheckboxItem
+                onClick={() => handleSort("-pricePerSlot")}
+              >
                 Price: High to Low
               </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem onClick={() => handleSort("-rating")}>
+              {/* <DropdownMenuCheckboxItem onClick={() => handleSort("-rating")}>
                 Rating: High to Low
-              </DropdownMenuCheckboxItem>
+              </DropdownMenuCheckboxItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
           <Button variant="outline">

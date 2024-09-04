@@ -144,3 +144,11 @@ export type TBooking = {
   room: string;
   user: string;
 };
+
+export type ApiError = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+  stack: string;
+};

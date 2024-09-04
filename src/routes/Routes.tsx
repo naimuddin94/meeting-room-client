@@ -9,7 +9,7 @@ import Contact from "@/pages/Contact";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import ManageOrders from "@/pages/ManageOrders";
-import ManageProduct from "@/pages/MangeProduct";
+import ManageRoom from "@/pages/ManageRoom";
 import MyOrders from "@/pages/MyOrders";
 import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
@@ -57,10 +57,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/manage-product",
+        path: "/dashboard/manage-rooms",
         element: (
           <ProtectedRoute roles={["admin"]}>
-            <ManageProduct />,
+            <ManageRoom />,
           </ProtectedRoute>
         ),
       },

@@ -10,6 +10,7 @@ import { useFetchSingleRoomQuery } from "@/redux/api/roomApi";
 import { slotApi, useFetchAvailableSlotsQuery } from "@/redux/api/slotApi";
 import { currentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { TBooking } from "@/Types";
 import { formatDateString } from "@/utils";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -35,10 +36,6 @@ function CheckoutPage() {
 
   const user = useAppSelector(currentUser);
 
-  const handlePayment = (price: number) => {
-    navigate("/payment", { state: { price } });
-  };
-
   const slotOptions = slotsData?.data?.map((slot) => ({
     label: `${slot.startTime}-${slot.endTime}`,
     value: slot._id,
@@ -63,15 +60,19 @@ function CheckoutPage() {
     return <Loader size={200} />;
   }
 
+  const handlePayment = (price: number, bookingData: TBooking) => {
+    navigate("/payment", { state: { price, bookingData } });
+  };
+
   const onSubmit = async () => {
     console.log({ date, slotIds, id });
     const bookingData = {
       date,
       slots: slotIds,
-      room: id,
-      user: user?.userId,
+      room: id as string,
+      user: user?.userId as string,
     };
-    handlePayment(total);
+    handlePayment(total, bookingData);
   };
 
   return (

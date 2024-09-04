@@ -2,13 +2,6 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const ordersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    fetchPaymentKey: builder.mutation({
-      query: (price) => ({
-        url: "/payments",
-        method: "POST",
-        body: { price },
-      }),
-    }),
     createOrder: builder.mutation({
       query: (orderData) => ({
         url: "/carts",
@@ -51,7 +44,6 @@ const ordersApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useFetchPaymentKeyMutation,
   useCreateOrderMutation,
   useFetchOrdersQuery,
   useFetchAllOrdersQuery,

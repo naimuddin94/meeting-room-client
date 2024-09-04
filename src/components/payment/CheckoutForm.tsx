@@ -1,8 +1,8 @@
-import { useCreateOrderMutation } from "@/redux/api/ordersApi";
+import { TBooking } from "@/Types";
+import { useCreateBookingMutation } from "@/redux/api/bookingApi";
 import { currentUser } from "@/redux/features/auth/authSlice";
 import {
   clearCart,
-  currentCart,
   removeConfirmOrders,
 } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -14,7 +14,12 @@ import Loader from "../shared/Loader";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 
-const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
+type TCheckoutFormProps = {
+  clientSecret: string;
+  bookingData: TBooking;
+};
+
+const CheckoutForm = ({ clientSecret, bookingData }: TCheckoutFormProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -22,9 +27,8 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const user = useAppSelector(currentUser);
-  const cart = useAppSelector(currentCart);
 
-  const [createOrderFn] = useCreateOrderMutation();
+  const [createOrderFn] = useCreateBookingMutation();
 
   // Check for location state and navigate back if not present
   if (!location?.state) {
@@ -80,7 +84,7 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
       console.log({ paymentIntent });
       if (paymentIntent.status === "succeeded") {
         const ordersData = {
-          ...cart.confirmOrders,
+          ...bookingData,
           paymentInfo: paymentIntent.id,
         };
         createOrderFn(ordersData)

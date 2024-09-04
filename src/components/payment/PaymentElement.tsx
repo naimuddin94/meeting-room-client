@@ -1,17 +1,17 @@
-import { useFetchPaymentKeyMutation } from "@/redux/api/ordersApi";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Loader from "../shared/Loader";
 import CheckoutForm from "./CheckoutForm";
+import { useFetchPaymentKeyMutation } from "@/redux/api/bookingApi";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 export default function App() {
   const location = useLocation();
   const [clientSecret, setClientSecret] = useState("");
-  const { price } = location.state;
+  const { price, bookingData } = location.state;
 
   const [fetchPaymentFn, { isLoading }] = useFetchPaymentKeyMutation(price);
 
@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm clientSecret={clientSecret} />
+      <CheckoutForm clientSecret={clientSecret} bookingData={bookingData} />
     </Elements>
   );
 }

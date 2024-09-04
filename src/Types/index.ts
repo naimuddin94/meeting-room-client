@@ -137,3 +137,10 @@ export type TSlot = {
   endTime: string;
   isBooked: boolean;
 };
+
+export type TBooking = {
+  date: string;
+  slots: string[];
+  room: string;
+  user: string;
+};

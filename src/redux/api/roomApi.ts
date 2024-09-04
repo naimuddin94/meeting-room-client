@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/redux/api/baseApi";
 import { IRoom, TDataWithMeta, TResponse } from "@/Types";
 
@@ -5,7 +6,7 @@ const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     fetchAllRooms: builder.query<
       TResponse<TDataWithMeta<IRoom>>,
-      Record<string, string>
+      Record<string, any>
     >({
       query: (param) => {
         const params = new URLSearchParams();

@@ -30,7 +30,7 @@ function CheckoutPage() {
   });
 
   const { data: slotsData, refetch } = useFetchAvailableSlotsQuery(
-    { roomId: id as string, date: date ? formatDateString(date) : "" },
+    { date: date ? formatDateString(date) : "", roomId: id as string },
     { skip: !id || !date }
   );
 

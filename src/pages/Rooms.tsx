@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { useFetchAllRoomsQuery } from "@/redux/api/roomApi";
-import { IRoom } from "@/Types";
+import { IRoom, TMeta } from "@/Types";
 import { FilterIcon, FilterXIcon, ListOrderedIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -168,7 +168,7 @@ function Rooms() {
           </Select>
         </div>
       </div>
-      {data?.data?.meta?.total > 8 && (
+      {Number(data?.data?.result?.length) > 8 && (
         <div className="mb-4">
           <p className="text-muted-foreground w-fit">
             Total {data?.data?.meta?.total} products found
@@ -177,7 +177,7 @@ function Rooms() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {data?.data?.result?.length > 0 ? (
+        {Number(data?.data?.result?.length) > 0 ? (
           data?.data?.result?.map((room: IRoom) => (
             <RoomCard room={room} key={room._id} />
           ))
@@ -185,10 +185,10 @@ function Rooms() {
           <NoDataFound />
         )}
       </div>
-      {data?.data?.meta?.total > 8 && (
+      {Number(data?.data?.result?.length) > 8 && (
         <div className="flex justify-center mt-8">
           <PaginationComponent
-            meta={data?.data?.meta}
+            meta={data?.data?.meta as TMeta}
             onPageChange={handlePageChange}
           />
         </div>

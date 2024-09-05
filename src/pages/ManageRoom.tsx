@@ -35,7 +35,7 @@ import {
   useDeleteRoomMutation,
   useFetchAllRoomsQuery,
 } from "@/redux/api/roomApi";
-import { IRoom, TMeta } from "@/Types";
+import { IMeta, IRoom } from "@/Types";
 import {
   FilePenIcon,
   FilterIcon,
@@ -265,7 +265,7 @@ function ManageRoom() {
               {Number(data?.data?.meta?.total) > 8 && (
                 <div className="flex justify-center my-8">
                   <PaginationComponent
-                    meta={data?.data?.meta as TMeta}
+                    meta={data?.data?.meta as IMeta}
                     onPageChange={handlePageChange}
                   />
                 </div>

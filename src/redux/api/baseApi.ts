@@ -64,13 +64,9 @@ export const baseApi = createApi({
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
   tagTypes: [
-    "brand",
-    "product",
-    "rating",
-    "order",
-    "orders",
     "slot",
     "room",
+    "booking",
     "user",
   ],
 });

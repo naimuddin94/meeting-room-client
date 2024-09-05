@@ -1,4 +1,4 @@
-import { TBooking } from "@/Types";
+import { IBooking } from "@/Types";
 import { useCreateBookingMutation } from "@/redux/api/bookingApi";
 import { currentUser } from "@/redux/features/auth/authSlice";
 import {
@@ -16,7 +16,7 @@ import { toast } from "../ui/use-toast";
 
 type TCheckoutFormProps = {
   clientSecret: string;
-  bookingData: TBooking;
+  bookingData: IBooking;
 };
 
 const CheckoutForm = ({ clientSecret, bookingData }: TCheckoutFormProps) => {

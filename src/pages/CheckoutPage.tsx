@@ -10,7 +10,7 @@ import { useFetchSingleRoomQuery } from "@/redux/api/roomApi";
 import { slotApi, useFetchAvailableSlotsQuery } from "@/redux/api/slotApi";
 import { currentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { TBooking } from "@/Types";
+import { IBooking } from "@/Types";
 import { formatDateString } from "@/utils";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -60,7 +60,7 @@ function CheckoutPage() {
     return <Loader size={200} />;
   }
 
-  const handlePayment = (price: number, bookingData: TBooking) => {
+  const handlePayment = (price: number, bookingData: IBooking) => {
     navigate("/payment", { state: { price, bookingData } });
   };
 

@@ -1,25 +1,16 @@
 import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { toast } from "@/components/ui/use-toast";
-import { useChangeCartStatusMutation } from "@/redux/api/ordersApi";
-import { ICart } from "@/Types/manageOrder";
-import { cartStatus } from "@/utils";
-import { useState } from "react";
+import { useChangeBookingStatusMutation } from "@/redux/api/bookingApi";
+import { IBooking } from "@/Types";
+import { FilePenIcon } from "lucide-react";
 
-const OrdersTableRow = ({ cart }: { cart: ICart }) => {
-  const [status, setStatus] = useState(cart?.status);
-  const [changeStatusFn] = useChangeCartStatusMutation();
+const OrdersTableRow = ({ bookingInfo }: { bookingInfo: IBooking }) => {
+  const [changeStatusFn] = useChangeBookingStatusMutation();
 
   const handleChangeStatus = (newStatus: string) => {
-    setStatus(newStatus);
-    changeStatusFn({ cartId: cart._id, status: newStatus })
+    changeStatusFn({ bookingId: bookingInfo._id, status: newStatus })
       .unwrap()
       .then((res) => {
         toast({
@@ -36,35 +27,36 @@ const OrdersTableRow = ({ cart }: { cart: ICart }) => {
   };
 
   return (
-    <TableRow key={cart._id}>
-      <TableCell className="font-medium">{cart.user.name}</TableCell>
+    <TableRow key={bookingInfo._id}>
+      <TableCell className="font-medium">{bookingInfo.user.name}</TableCell>
 
-      <TableCell>{cart.address}</TableCell>
-      <TableCell>{cart.phone}</TableCell>
-      <TableCell>${cart.totalAmount}</TableCell>
+      <TableCell>{bookingInfo?.room?.name}</TableCell>
+      <TableCell>{bookingInfo?.room?.roomNo}</TableCell>
+      <TableCell>${bookingInfo?.paymentInfo}</TableCell>
       <TableCell>
-        <Badge variant={status === "processing" ? "default" : "destructive"}>
-          {status}
+        <Badge
+          variant={
+            bookingInfo.isConfirmed === "confirmed" ? "default" : "destructive"
+          }
+        >
+          {bookingInfo.isConfirmed}
         </Badge>
       </TableCell>
       <TableCell>
-        <div className="flex items-center gap-2">
-          <Select
-            onValueChange={(value) => handleChangeStatus(value)}
-            value={status}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select status" />
-            </SelectTrigger>
-            <SelectContent>
-              {cartStatus.map((status, index) => (
-                <SelectItem key={index} value={status}>
-                  {status}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Button
+          size="icon"
+          variant="outline"
+          onClick={() =>
+            handleChangeStatus(
+              bookingInfo?.isConfirmed === "confirmed"
+                ? "unconfirmed"
+                : "confirmed"
+            )
+          }
+        >
+          <FilePenIcon className="h-4 w-4" />
+          <span className="sr-only">Edit</span>
+        </Button>
       </TableCell>
     </TableRow>
   );

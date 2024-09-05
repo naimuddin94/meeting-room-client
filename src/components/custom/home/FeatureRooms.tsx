@@ -3,7 +3,7 @@ import Heading from "@/components/shared/Heading";
 import { featureCardData } from "@/utils";
 import FeatureCard from "./FeatureCard";
 
-function FeatureBrands() {
+function FeatureRooms() {
   return (
     <Container className="my-8">
       <div className="bg-primary-foreground dark:bg-muted/30 py-12 rounded-lg grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
@@ -29,4 +29,4 @@ function FeatureBrands() {
   );
 }
 
-export default FeatureBrands;
+export default FeatureRooms;

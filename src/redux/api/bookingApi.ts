@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/redux/api/baseApi";
+import { IBooking, IDataWithMeta, IResponse } from "@/Types";
 
 const ordersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,40 +17,41 @@ const ordersApi = baseApi.injectEndpoints({
         method: "POST",
         body: bookingData,
       }),
-      invalidatesTags: ["product", "order"],
+      invalidatesTags: ["booking"],
     }),
-    // fetchOrders: builder.query({
-    //   query: () => ({
-    //     url: "/carts/my-orders",
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["order"],
-    // }),
-    // fetchAllOrders: builder.query({
-    //   query: (param) => {
-    //     const params = new URLSearchParams();
+    fetchAllBookings: builder.query<
+      IResponse<IDataWithMeta<IBooking>>,
+      Record<string, any>
+    >({
+      query: (param) => {
+        const params = new URLSearchParams();
 
-    //     for (const key in param) {
-    //       params.append(key, param[key]);
-    //     }
+        for (const key in param) {
+          params.append(key, param[key]);
+        }
 
-    //     return {
-    //       url: "/carts",
-    //       method: "GET",
-    //       params: params,
-    //     };
-    //   },
-    //   providesTags: ["orders"],
-    // }),
-    // changeCartStatus: builder.mutation({
-    //   query: ({ cartId, status }) => ({
-    //     url: `/carts/change-status/${cartId}`,
-    //     method: "PATCH",
-    //     body: { status },
-    //   }),
-    // }),
+        return {
+          url: "/bookings",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["booking"],
+    }),
+    changeBookingStatus: builder.mutation({
+      query: ({ bookingId, status }) => ({
+        url: `/bookings/${bookingId}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["booking"],
+    }),
   }),
 });
 
-export const { useFetchPaymentKeyMutation, useCreateBookingMutation } =
-  ordersApi;
+export const {
+  useFetchPaymentKeyMutation,
+  useCreateBookingMutation,
+  useFetchAllBookingsQuery,
+  useChangeBookingStatusMutation,
+} = ordersApi;

@@ -1,10 +1,10 @@
 import { baseApi } from "@/redux/api/baseApi";
-import { TResponse, TSlot } from "@/Types";
+import { IResponse, ISlot } from "@/Types";
 
 export const slotApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     fetchAvailableSlots: builder.query<
-      TResponse<TSlot[]>,
+      IResponse<ISlot[]>,
       Record<string, string>
     >({
       query: (param) => {

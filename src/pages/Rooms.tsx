@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { useFetchAllRoomsQuery } from "@/redux/api/roomApi";
-import { IRoom, TMeta } from "@/Types";
+import { IMeta, IRoom } from "@/Types";
 import { FilterIcon, FilterXIcon, ListOrderedIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -188,7 +188,7 @@ function Rooms() {
       {Number(data?.data?.result?.length) > 8 && (
         <div className="flex justify-center mt-8">
           <PaginationComponent
-            meta={data?.data?.meta as TMeta}
+            meta={data?.data?.meta as IMeta}
             onPageChange={handlePageChange}
           />
         </div>

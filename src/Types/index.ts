@@ -1,99 +1,10 @@
-export type TBrand = {
+export interface IUser {
   _id: string;
   name: string;
-  origin: string;
-};
-
-export type TProduct = {
-  _id: string;
-  name: string;
+  email: string;
   image: string;
-  brand: {
-    name: string;
-    origin: string;
-  };
-  description: string;
-  material: string;
-  weight: string;
-  rating: number;
-  price: number;
-  stock: number;
-};
-
-export type TRating = {
-  _id: string;
-  user: { _id: string; name: string; image: string };
-  product: string;
-  rating: number;
-  feedback: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-export type TCartProduct = {
-  _id: string;
-  image: string;
-  name: string;
-  price: number;
-  quantity: number;
-  stock: number;
-};
-
-export type TOrder = {
-  product: string;
-  quantity: number;
-};
-
-export type TConfirmOrders = {
-  address: string;
-  phone: string;
-  city: string;
-  state: string;
-  zip: string;
-  orders: TOrder[];
-};
-
-export type TCartState = {
-  products: TCartProduct[];
-  totalAmount: number;
-  confirmOrders: TConfirmOrders | null;
-};
-
-type TOrderProduct = {
-  _id: string;
-  name: string;
-  image: string;
-  brand: string;
-  price: number;
-  rating: number;
-};
-
-export type TOrderDetail = {
-  _id: string;
-  user: string;
-  product: TOrderProduct;
-  quantity: number;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type TFetchOrder = {
-  _id: string;
-  user: string;
-  orders: TOrderDetail[];
-  totalAmount: number;
-  address: string;
-  city: string;
-  state: string;
-  phone: string;
-  paymentInfo: string;
-  isConfirmed: boolean;
-  status: string;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
+  role: string;
+}
 
 export interface IRoom {
   _id: string;
@@ -110,40 +21,40 @@ export interface IRoom {
   updatedAt: string;
 }
 
-export type TMeta = {
+export interface IMeta {
   page: number;
   limit: number;
   total: number;
   totalPage: number;
-};
+}
 
-export type TResponse<T> = {
+export interface IResponse<T> {
   statusCode: number;
   data: T;
   message: string;
   success: boolean;
-};
+}
 
-export type TDataWithMeta<T> = {
-  meta: TMeta;
+export interface IDataWithMeta<T> {
+  meta: IMeta;
   result: T[];
-};
+}
 
-export type TSlot = {
+export interface ISlot {
   _id: string;
   room: IRoom;
   date: string;
   startTime: string;
   endTime: string;
   isBooked: boolean;
-};
+}
 
-export type TBooking = {
+export interface IBookingInputs {
   date: string;
   slots: string[];
   room: string;
   user: string;
-};
+}
 
 export type ApiError = {
   userId: number;
@@ -152,3 +63,17 @@ export type ApiError = {
   completed: boolean;
   stack: string;
 };
+
+export interface IBooking {
+  _id: string;
+  date: string;
+  slots: ISlot[];
+  room: IRoom;
+  user: IUser;
+  totalAmount: number;
+  isConfirmed: string;
+  paymentInfo: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

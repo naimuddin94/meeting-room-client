@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/redux/api/baseApi";
-import { IRoom, TDataWithMeta, TResponse } from "@/Types";
+import { IDataWithMeta, IResponse, IRoom } from "@/Types";
 
 const roomApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     fetchAllRooms: builder.query<
-      TResponse<TDataWithMeta<IRoom>>,
+      IResponse<IDataWithMeta<IRoom>>,
       Record<string, any>
     >({
       query: (param) => {
@@ -23,7 +23,7 @@ const roomApi = baseApi.injectEndpoints({
       },
       providesTags: ["room"],
     }),
-    fetchSingleRoom: builder.query<TResponse<IRoom>, string>({
+    fetchSingleRoom: builder.query<IResponse<IRoom>, string>({
       query: (id) => {
         return {
           url: `/rooms/${id}`,

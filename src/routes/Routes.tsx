@@ -3,14 +3,12 @@ import PaymentElement from "@/components/payment/PaymentElement";
 import About from "@/pages/About";
 import AddRoom from "@/pages/AddRoom";
 import AddSlot from "@/pages/AddSlot";
-import CartPage from "@/pages/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
 import Contact from "@/pages/Contact";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
-import ManageOrders from "@/pages/ManageOrders";
+import ManageBookings from "@/pages/ManageBooking";
 import ManageRoom from "@/pages/ManageRoom";
-import MyOrders from "@/pages/MyOrders";
 import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
 import RoomDetails from "@/pages/RoomDetails";
@@ -40,14 +38,7 @@ export const router = createBrowserRouter([
         path: "/contact-us",
         element: <Contact />,
       },
-      {
-        path: "/dashboard/my-orders",
-        element: (
-          <ProtectedRoute roles={["admin", "user"]}>
-            <MyOrders />,
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "/dashboard/add-room",
         element: (
@@ -61,14 +52,6 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute roles={["admin"]}>
             <ManageRoom />,
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/dashboard/orders",
-        element: (
-          <ProtectedRoute roles={["admin"]}>
-            <ManageOrders />,
           </ProtectedRoute>
         ),
       },
@@ -89,6 +72,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/bookings",
+        element: (
+          <ProtectedRoute roles={["admin"]}>
+            <ManageBookings />,
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "/dashboard/add-admin",
         element: (
           <ProtectedRoute roles={["admin"]}>
@@ -100,14 +91,7 @@ export const router = createBrowserRouter([
         path: "/room/:id",
         element: <RoomDetails />,
       },
-      {
-        path: "/dashboard/carts",
-        element: (
-          <ProtectedRoute roles={["admin", "user"]}>
-            <CartPage />,
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "/dashboard/checkout/:id",
         element: (

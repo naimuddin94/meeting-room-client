@@ -39,10 +39,17 @@ const ordersApi = baseApi.injectEndpoints({
       providesTags: ["booking"],
     }),
     changeBookingStatus: builder.mutation({
-      query: ({ bookingId, status }) => ({
+      query: ({ bookingId, isConfirmed }) => ({
         url: `/bookings/${bookingId}`,
         method: "PUT",
-        body: { status },
+        body: { isConfirmed },
+      }),
+      invalidatesTags: ["booking"],
+    }),
+    deleteBooking: builder.mutation({
+      query: (bookingId) => ({
+        url: `/bookings/${bookingId}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["booking"],
     }),
@@ -54,4 +61,5 @@ export const {
   useCreateBookingMutation,
   useFetchAllBookingsQuery,
   useChangeBookingStatusMutation,
+  useDeleteBookingMutation,
 } = ordersApi;

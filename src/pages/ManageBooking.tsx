@@ -190,7 +190,7 @@ function ManageBookings() {
                   <TableHead>Customer Name</TableHead>
                   <TableHead>Room Name</TableHead>
                   <TableHead>Room Number</TableHead>
-                  <TableHead>Payment ID</TableHead>
+                  <TableHead>Booking Schedule</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>

@@ -1,11 +1,11 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -14,78 +14,83 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { IBooking } from "@/Types";
 import { PackageIcon } from "lucide-react";
+import moment from "moment";
 
 interface IBookingCardProps {
-  index: number;
+  bookingInfo: IBooking;
 }
 
-const BookingCard = ({ cart, index }) => {
+const BookingCard = ({ bookingInfo }: IBookingCardProps) => {
   return (
     <>
-      <Card key={cart._id}>
+      <Card key={bookingInfo._id}>
         <CardHeader className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <PackageIcon className="h-5 w-5 text-muted-foreground" />
-            <span className="font-medium">Order # {index + 1}</span>
+            <span className="font-medium">Token # {bookingInfo._id}</span>
           </div>
           <span className="text-sm text-muted-foreground">
-            {new Date(cart.createdAt).toLocaleDateString()}
+            {new Date(bookingInfo.createdAt).toLocaleDateString()}
           </span>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Product</TableHead>
-                <TableHead className="hidden sm:table-cell">Quantity</TableHead>
-                <TableHead className="hidden sm:table-cell">Status</TableHead>
-                <TableHead className="text-right">Total</TableHead>
+                <TableHead>Booking Schedule</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Amount</TableHead>
+                <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {cart?.orders?.map((order) => {
-                const { _id, name } = order.product;
-                return (
-                  <TableRow key={_id}>
-                    <TableCell>
-                      <div className="font-medium flex items-center gap-2">
-                        {name}
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                      <div>{order.quantity}</div>
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                      <Badge
-                        variant={
-                          cart.status === "received"
-                            ? "secondary"
-                            : cart.status === "processing"
-                            ? "outline"
-                            : "default"
-                        }
-                        className="text-xs"
-                      >
-                        {cart.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {(order.quantity * order.product.price).toFixed(2)}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              <TableRow>
+                <TableCell className="flex gap-2 flex-wrap">
+                  {bookingInfo?.slots?.map((item) => (
+                    <Badge variant="outline">{`${item.startTime} - ${item.endTime}`}</Badge>
+                  ))}
+                </TableCell>
+                <TableCell>
+                  {moment(bookingInfo.date).format("DD-MM-YYYY")}
+                </TableCell>
+                <TableCell>{bookingInfo.totalAmount}</TableCell>
+                <TableCell className="flex justify-end">
+                  {bookingInfo.isConfirmed === "confirmed" ? (
+                    <Badge className="bg-green-500">Confirmed</Badge>
+                  ) : (
+                    <Badge variant="destructive">pending</Badge>
+                  )}
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
-        </CardContent>
-        <CardFooter className="flex items-center justify-between">
-          <div className="text-muted-foreground text-sm">
-            Total: ${cart.totalAmount.toFixed(2)}
+          <div className="mt-12">
+            <div className="space-y-1 px-4">
+              <h4 className="text-sm font-medium leading-none">
+                {bookingInfo.room.name}
+              </h4>
+              <p className="text-sm text-muted-foreground">
+                {bookingInfo.room.amenities.map((amenity) => (
+                  <span key={amenity}>{amenity}, </span>
+                ))}
+              </p>
+            </div>
+            <Separator className="my-4" />
+            <div className="flex h-5 items-center space-x-4 text-sm px-4">
+              <div>Room No: {bookingInfo.room.roomNo}</div>
+              <Separator orientation="vertical" />
+              <div>Floor No: {bookingInfo.room.floorNo}</div>
+              <Separator orientation="vertical" />
+              <div>Capacity: {bookingInfo.room.capacity}</div>
+            </div>
           </div>
-          <Button variant="outline" size="sm">
-            View Order
-          </Button>
+        </CardContent>
+        <CardFooter className="flex justify-end">
+          <div className="text-muted-foreground">
+            Total Pay: ${bookingInfo.totalAmount.toFixed(2)}
+          </div>
         </CardFooter>
       </Card>
     </>

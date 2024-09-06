@@ -1,39 +1,41 @@
+# 🔗 Meeting Room Booking System
 
-# 🔗 Mechanical Keyboard Shop
+I have developed a comprehensive meeting room booking system, showcasing my expertise in full-stack web development. This platform is designed to simplify the process of booking rooms for meetings and events, providing an intuitive experience for both users and administrators. Key features include:
 
-I have developed a robust mechanical keyboard ecommerce platform showcasing my expertise in full-stack web development. This platform is designed to offer a seamless shopping experience for enthusiasts and professionals alike, featuring a comprehensive array of functionalities:
+- Room Booking System: Users can effortlessly browse available meeting rooms, filter by amenities, and book rooms based on date and time preferences. The system provides real-time availability updates, ensuring users can book rooms with confidence.
 
-- Cart System: The integrated cart system allows users to effortlessly add desired products, review selections, and proceed to checkout with ease.
+- Admin Dashboard: The platform features a powerful admin dashboard, allowing administrators to manage room availability, monitor bookings, and update room details such as capacity, amenities, and pricing. Admins can also oversee user activity and generate reports for booking analytics.
 
-- Payment Integration (Stripe): Secure Stripe payment integration ensures smooth and reliable transaction processing, offering users a hassle-free purchasing experience.
+- Payment Integration: Secure online payment options are available for paid room bookings, ensuring a smooth transaction process. This feature allows organizations to monetize room rentals and manage payments efficiently.
 
-- Review and Rating System: Enhancing user interaction, the platform includes a dynamic review and rating system. Users can provide feedback, share experiences, and make informed decisions based on community reviews.
+- User Roles and Permissions: Role-based access control ensures a clear distinction between user types—whether regular users, administrators. Each role is granted specific permissions, enhancing security and improving functionality for each user group.
 
-- Admin Product Management: Administrators benefit from a robust product management system, enabling efficient management of inventory, product details, pricing, and availability. This ensures that the platform maintains an up-to-date and organized product catalog.
+- Calendar and Scheduling: The platform includes an interactive calendar view that allows users and admins to see current room bookings and available time slots at a glance. This feature streamlines the scheduling process and prevents double-booking.
 
-- Role-Based Handling: The implementation of role-based access control ensures that each user group—whether customer, admin. This feature enhances security and streamlines user interaction based on predefined roles.
+- Mobile-Friendly Interface: The platform is designed with a responsive user interface that adapts to all devices, allowing users to book and manage rooms easily from smartphones, tablets, or desktops.
 
-- User-Friendly Interface: The platform boasts an intuitive and responsive user interface, optimizing user experience across devices. From product browsing to checkout, the interface is designed for seamless navigation and usability.
+- Security and Data Privacy: The platform implements strict security protocols to protect user data and ensure that all booking and payment information remains confidential. Encryption and secure communication channels are integrated for maximum safety.
 
-- Security and Scalability: Built with a focus on security best practices, the platform ensures data protection and integrity throughout user interactions and transactions. It is also designed with scalability in mind, capable of handling increased traffic and growing product catalog demands.
+This project reflects my technical proficiency in full-stack development, particularly with technologies like React, TypeScript, and ShadCN, and demonstrates my ability to design user-centric solutions for efficient meeting room management. It highlights my focus on creating reliable, scalable, and secure applications that cater to both user and business needs.```
 
-- This project not only demonstrates my technical proficiency in web development, including React and ShadCN, but also highlights my ability to create robust, user-centric ecommerce solutions. It embodies my commitment to delivering high-quality, feature-rich applications that meet both user and business needs effectively.
+This description provides a detailed overview of your project, showcasing both technical capabilities and user-centric design.
 
 ## Project Link
-[![Live Link](https://img.shields.io/badge/Frontend-Live-brightgreen?style=for-the-badge)](https://keeb-keyboard.vercel.app/)
+
+[![Live Link](https://img.shields.io/badge/API-Live-brightgreen?style=for-the-badge)](https://meeting-room-client-lemon.vercel.app/)
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/naimuddin94/MK_shop_client.git
+  git clone https://github.com/naimuddin94/meeting-room-client.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd MK_shop_client
+  cd meeting-room-client
 ```
 
 Set environment variables fllowing env.exaple file
@@ -56,21 +58,10 @@ Build project
   npm run build
 ```
 
-
 ## 🔗 Documentation
-[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://documenter.getpostman.com/view/34122341/2sA3kRJ3gC)
 
+[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://documenter.getpostman.com/view/34122341/2sA3XQh2Rt)
 
 ## Database Diagram
 
-![Diagram](https://res.cloudinary.com/dxoncladp/image/upload/v1721145024/Mechanical_Keyboard_Shop_f8e22f.png)
-
-## Contact
-
-If you have any questions or suggestions, feel free to reach out to me.
-
-[![Connect on LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/iamnaimuddin)
-
----
-
-This frontend project not only showcases my expertise in frontend development, utilizing technologies like React and ShadCN, but also demonstrates my commitment to delivering user-friendly and engaging web applications that meet modern standards and user expectations effectively.
+![Diagram](https://res.cloudinary.com/dxoncladp/image/upload/v1718436659/Untitled_ej3xcc.png)

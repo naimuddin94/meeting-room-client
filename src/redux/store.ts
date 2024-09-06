@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   FLUSH,
   PAUSE,
@@ -12,7 +12,6 @@ import {
 import storage from "redux-persist/lib/storage";
 import { baseApi } from "./api/baseApi";
 import authReducer from "./features/auth/authSlice";
-import cartReducer from "./features/cart/cartSlice";
 
 // Persist configurations
 const authPersistConfig = {
@@ -20,19 +19,12 @@ const authPersistConfig = {
   storage,
 };
 
-const cartPersistConfig = {
-  key: "cart",
-  storage,
-};
-
 // Persisted reducers
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
-const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 // Combine reducers
 const rootReducer = combineReducers({
   auth: persistedAuthReducer,
-  cart: persistedCartReducer,
   [baseApi.reducerPath]: baseApi.reducer,
 });
 

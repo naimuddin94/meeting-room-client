@@ -1,11 +1,7 @@
 import { IBooking } from "@/Types";
 import { useCreateBookingMutation } from "@/redux/api/bookingApi";
 import { currentUser } from "@/redux/features/auth/authSlice";
-import {
-  clearCart,
-  removeConfirmOrders,
-} from "@/redux/features/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { FormEvent, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -22,7 +18,6 @@ type TCheckoutFormProps = {
 const CheckoutForm = ({ clientSecret, bookingData }: TCheckoutFormProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -91,8 +86,6 @@ const CheckoutForm = ({ clientSecret, bookingData }: TCheckoutFormProps) => {
           .unwrap()
           .then((res) => {
             if (res.statusCode === 201) {
-              dispatch(removeConfirmOrders());
-              dispatch(clearCart());
               toast({
                 title: res?.message,
                 duration: 2000,

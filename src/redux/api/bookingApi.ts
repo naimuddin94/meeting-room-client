@@ -11,6 +11,13 @@ const ordersApi = baseApi.injectEndpoints({
         body: { price },
       }),
     }),
+    fetchMyBooking: builder.query({
+      query: () => ({
+        url: "/my-bookings",
+        method: "GET",
+      }),
+      providesTags: ["booking"],
+    }),
     createBooking: builder.mutation({
       query: (bookingData) => ({
         url: "/bookings",
@@ -58,6 +65,7 @@ const ordersApi = baseApi.injectEndpoints({
 
 export const {
   useFetchPaymentKeyMutation,
+  useFetchMyBookingQuery,
   useCreateBookingMutation,
   useFetchAllBookingsQuery,
   useChangeBookingStatusMutation,

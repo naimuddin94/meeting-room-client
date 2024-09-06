@@ -13,7 +13,7 @@ function MyBooking() {
   return (
     <div className="bg-muted/40 min-h-screen py-8 px-4 md:px-6">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Your Booking Information</h1>
+        <h1 className="text-2xl font-bold mb-6">Booking Information</h1>
         <div className="grid gap-6">
           {data?.data?.result?.length ? (
             data?.data?.result?.map((bookingInfo) => (

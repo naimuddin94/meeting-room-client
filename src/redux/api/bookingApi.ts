@@ -11,11 +11,23 @@ const ordersApi = baseApi.injectEndpoints({
         body: { price },
       }),
     }),
-    fetchMyBooking: builder.query({
-      query: () => ({
-        url: "/my-bookings",
-        method: "GET",
-      }),
+    fetchMyBooking: builder.query<
+      IResponse<IDataWithMeta<IBooking>>,
+      Record<string, any>
+    >({
+      query: (param) => {
+        const params = new URLSearchParams();
+
+        for (const key in param) {
+          params.append(key, param[key]);
+        }
+
+        return {
+          url: "/my-bookings",
+          method: "GET",
+          params: params,
+        };
+      },
       providesTags: ["booking"],
     }),
     createBooking: builder.mutation({

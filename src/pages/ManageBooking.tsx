@@ -124,10 +124,6 @@ function ManageBookings() {
                         min={0}
                         max={5}
                         step={0.5}
-                        //   value={[filters.rating]}
-                        //   onValueChange={(value) =>
-                        //     setFilters({ ...filters, rating: value })
-                        //   }
                         className="w-full"
                       />
                     </div>

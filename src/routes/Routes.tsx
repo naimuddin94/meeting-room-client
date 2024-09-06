@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import ManageBookings from "@/pages/ManageBooking";
 import ManageRoom from "@/pages/ManageRoom";
+import MyBooking from "@/pages/MyBooking";
 import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
 import RoomDetails from "@/pages/RoomDetails";
@@ -38,7 +39,6 @@ export const router = createBrowserRouter([
         path: "/contact-us",
         element: <Contact />,
       },
-
       {
         path: "/dashboard/add-room",
         element: (
@@ -91,12 +91,19 @@ export const router = createBrowserRouter([
         path: "/room/:id",
         element: <RoomDetails />,
       },
-
       {
         path: "/dashboard/checkout/:id",
         element: (
           <ProtectedRoute roles={["admin", "user"]}>
             <CheckoutPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-bookings",
+        element: (
+          <ProtectedRoute roles={["admin", "user"]}>
+            <MyBooking />,
           </ProtectedRoute>
         ),
       },

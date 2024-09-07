@@ -11,10 +11,10 @@ const Home = () => {
       <Banner />
       <FeatureRooms />
       <ServiceAdvertisement />
-      <CustomerReviews />
       <WhyChooseUs />
       <div className="w-full h-[1px] bg-muted-foreground/20"/>
       <HowItWorks />
+      <CustomerReviews />
     </div>
   );
 };
